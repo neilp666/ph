@@ -1,24 +1,31 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1><a href="<%= @product.name %>"><%= @product.link %></a><br>
+    <p><%= @product.tagline %></p>
+    <p><%= @product.platform %></p>
+  <small>Submitted by <%= @product.user %></small></h1>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+<div class="btn-group">
+  <%= link_to "Visit URL", @product.link, class: "btn btn-primary" %>
+</div>
 
-<p>
-  <strong>Link:</strong>
-  <%= @product.link %>
-</p>
+<% if @product.user == current_user %>
+  <div class="btn-group">
+      <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-default" %> |
+      <%= link_to 'Destroy', @product, method: :delete, data: { confirm 'Are you sure' }, class: "btn btn-default" %>
+  </div>
+<% end %>
 
-<p>
-  <strong>Tagline:</strong>
-  <%= @product.tagline %>
-</p>
+<div clas="btn-group pull right">
+    <%= link_to like_product_path(@product), method: :put, class: "btn btn-default btn-sm" do %>
+      <span class="glyhicon glyphicon-chevron-up"></span>
+           Upvote
+    <%= @product.get_upvotes.size %>
+<% end %>
 
-<p>
-  <strong>Platform:</strong>
-  <%= @product.platform %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+    <%= link_to dislike_product_path(@product), method: :put, class: "btn btn-default btn-sm" do %>
+         <span class="glyhicon glyphicon-chevron-up"></span>
+         Downvote
+        <%= @product.get_downvotes.size %>
+        <% end %>
+      </div>

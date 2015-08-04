@@ -1,22 +1,24 @@
-
-  <ul class="nav nav-pills pull-right">
-        <% if user_signed_in? %>
-          <li><%= link_to 'Submit Link', new_link_path %></li>
-          <li><%= link_to 'Account Settings', edit_user_registrations_path %></li>
-          <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
-   
+<header class="navbar navbar-default" role="navigation">
+  <div class="navbar-inner">
+    <div class="container">
+      <div id="logo" class="navbar brand"><%= link_to "Product Hunt", root_path %></div>
+      <nav class="collapse navbar-collapse navbar-ex1-collapse">
+          <% if user_signed_in? %>
+             <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to 'Submit Product', new_link_path %></li>
+                <li><%= link_to 'Account Settings', edit_user_registrations_path %></li>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
+             </ul>
         <% else %>
- 
-        <li><%= link_to 'Sign up', new_user_registration_path %></li>
-        <li><%= link_to 'Sign in', new_user_session_path %></li>
-     
-        </ul>
+              <ul class="nav navbar-nav pull-right">
+               <li><%= link_to 'Sign up', new_user_registration_path %></li>
+               <li><%= link_to 'Sign in', new_user_session_path %></li>
+             </ul>
       <% end %>
-</div>
-<div class"page-header">
-<h3>Product Hunt</h3>
-
-</div>
+    </nav>
+   </div>
+  </div>
+</header>
 
     
 

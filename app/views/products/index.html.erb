@@ -1,32 +1,31 @@
-<h1>Listing products</h1>
+<% @product.each do |product| %>
+  <div class="link row clearfix">
+    <h2>
+      <%= link_to product.name, product %><br>
+      <small class="author">Submitted <%= time_ago_in_words(link.created_at) %>
+        by <%= product.user.email %></small>
+    </h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Link</th>
-      <th>Tagline</th>
-      <th>Platform</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+          <div clas="btn-group">
+        <a class="btn btn-default btn-sm" href="<%= product.link %>">Visit Link</a>
+ 
+          <%= link_to like_product_path(product), method: :put, class: "btn btn-default btn-sm" do %>
+           <span class="glyhicon glyphicon-chevron-up"></span>
+           Upvote
+          <%= product.get_upvotes.size %>
+          <% end %>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.link %></td>
-        <td><%= product.tagline %></td>
-        <td><%= product.platform %></td>
-        <td><%= link_to 'Show', product %></td>
-
-        <% if product.user = current.user %>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <%= link_to dislike_product_path(product), method: :put, class: "btn btn-default btn-sm" do %>
+         <span class="glyhicon glyphicon-chevron-up"></span>
+         Downvote
+        <%= product.get_downvotes.size %>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      </div>
+  </div>
+<% end %>
+
+
+
+
 
 
